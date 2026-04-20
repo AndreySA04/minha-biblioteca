@@ -44,26 +44,17 @@ export async function updateBook(input: UpdateBookInput): Promise<void> {
   const db = await getDatabase();
   await db.runAsync(
     `UPDATE books 
-     SET title = ?, author = ?, synopsis = ?, coverUrl = ? 
+     SET title = ?, author = ?, synopsis = ?, coverUrl = ?, rating = ?, status = ?
      WHERE id = ?`,
     [
       input.title,
       input.author,
       input.synopsis || null,
       input.coverUrl || null,
+      input.rating || null,
+      input.status,
       input.id
     ]
-  );
-}
-
-export async function updateBookStatus(
-  id: number,
-  status: BookStatus
-): Promise<void> {
-  const db = await getDatabase();
-  await db.runAsync(
-    'UPDATE books SET status = ? WHERE id = ?',
-    [status, id]
   );
 }
 

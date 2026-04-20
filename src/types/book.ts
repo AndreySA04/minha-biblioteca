@@ -1,4 +1,6 @@
-export type BookStatus = 'read' | 'reading' | 'want_to_read';
+export type BookStatus =  'read' | 'reading' | 'want_to_read';
+
+export type SortOption = 'recent' | 'alphabetical' | 'rating';
 
 export interface Book {
   id: number;
@@ -26,10 +28,12 @@ export interface UpdateBookInput {
   author: string;
   synopsis?: string;
   coverUrl?: string;
+  rating?: number;
+  status: BookStatus;
 }
 
 export const BookStatusLabel: Record<BookStatus, string> = {
   read: 'Lido',
-  reading: 'Lendo agora',
+  reading: 'Lendo',
   want_to_read: 'Quero ler',
 };

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useFocusEffect } from 'expo-router';
 import * as BookRepository from '../database/bookRepository';
-import { Book, BookStatus, CreateBookInput, UpdateBookInput } from '../types/book';
+import { Book, BookStatus, SortOption, CreateBookInput, UpdateBookInput } from '../types/book';
 
 export type BookFilter = BookStatus | 'all';
 
@@ -9,6 +9,7 @@ export function useBooks() {
   const [books, setBooks] = useState<Book[]>([]);
   const [filter, setFilter] = useState<BookFilter>('all');
   const [loading, setLoading] = useState(true);
+  const [sortBy, setSortBy] = useState<SortOption>('recent');
 
   const loadBooks = useCallback(async () => {
     try {
@@ -31,6 +32,18 @@ export function useBooks() {
   const filteredBooks = books.filter((book) => {
     if (filter !== 'all') return book.status === filter;
     return true;
+  });
+
+  const sortedBooks = [...filteredBooks].sort((a, b) => {
+    switch (sortBy) {
+      case 'alphabetical':
+        return a.title.localeCompare(b.title);
+      case 'rating':
+        return (b.rating || 0) - (a.rating || 0);
+      case 'recent':
+      default:
+        return b.createdAt - a.createdAt;
+    }
   });
 
   const addBook = useCallback(
@@ -59,30 +72,6 @@ export function useBooks() {
     [loadBooks]
   );
 
-  const changeBookStatus = useCallback(
-    async (id: number, newStatus: BookStatus) => {
-      try {
-        await BookRepository.updateBookStatus(id, newStatus);
-        await loadBooks();
-      } catch (error) {
-        console.error('Erro ao atualizar status:', error);
-      }
-    },
-    [loadBooks]
-  );
-
-  const changeBookRating = useCallback(
-    async (id: number, newRating: number) => {
-      try {
-        await BookRepository.updateBookRating(id, newRating);
-        await loadBooks();
-      } catch (error) {
-        console.error('Erro ao atualizar status:', error);
-      }
-    },
-    [loadBooks]
-  );
-
   const removeBook = useCallback(
     async (id: number) => {
       try {
@@ -95,23 +84,16 @@ export function useBooks() {
     [loadBooks]
   );
 
-  const readCount = books.filter((b) => b.status === 'read').length;
-  const readingCount = books.filter((b) => b.status === 'reading').length;
-  const wantToReadCount = books.filter((b) => b.status === 'want_to_read').length;
-
   return {
-    books: filteredBooks,
+    books: sortedBooks,
     filter,
+    sortBy,
     loading,
-    allBooksCount: books.length,
-    readCount,
-    readingCount,
-    wantToReadCount,
     setFilter,
+    setSortBy,
     reloadBooks: loadBooks,
     addBook,
     editBookDetails,
-    changeBookStatus,
     removeBook,
   };
 }

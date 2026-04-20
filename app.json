@@ -3,6 +3,7 @@
     "name": "minha-biblioteca",
     "slug": "minha-biblioteca",
     "version": "1.0.0",
+    "scheme": "minha-biblioteca",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

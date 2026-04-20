@@ -66,23 +66,23 @@ O projeto adota a **Separação de Responsabilidades (SoC - Separation of Concer
 ```
 minha-biblioteca/
 ├── app/
-│ ├── _layout.tsx                 # Configuração de temas, Toasts e navegação global
-│ ├── index.tsx                   # Tela principal (Lista de Livros, Filtros e Ordenação)
-│ └── form.tsx                    # Tela de formulário (Criação, Edição e Upload de Capa)
+│ ├── _layout.tsx                 ← Configuração de temas, Toasts e navegação global
+│ ├── index.tsx                   ← Tela principal (Lista de Livros, Filtros e Ordenação)
+│ └── form.tsx                    ← Tela de formulário (Criação, Edição e Upload de Capa)
 ├── src/
-│ ├── components/                 # Componentes reutilizáveis
-│ │ ├── BookItem.tsx              # Card do livro na listagem
-│ │ ├── FilterBar.tsx             # Barra de abas de status
-│ │ └── EmptyState.tsx            # Telas de estado vazio amigáveis
+│ ├── components/                 ← Componentes reutilizáveis
+│ │ ├── BookItem.tsx              ← Card do livro na listagem
+│ │ ├── FilterBar.tsx             ← Barra de abas de status
+│ │ └── EmptyState.tsx            ← Telas de estado vazio amigáveis
 │ ├── hooks/
-│ │ └── useBooks.ts               # Gerenciamento de estado, filtros e regras de negócio
+│ │ └── useBooks.ts               ← Gerenciamento de estado, filtros e regras de negócio
 │ ├── database/
-│ │ └── repository.ts             # Operações CRUD diretas com o SQLite
+│ │ └── repository.ts             ← Operações CRUD diretas com o SQLite
 │ └── types/
-│ └── book.ts                     # Definições de interfaces e tipos do TypeScript
-├── global.css                    # Injeção de dependências do Tailwind/NativeWind
-├── tailwind.config.js            # Configuração de design system e presets
-├── babel.config.js               # Configurações do compilador
+│ └── book.ts                     ← Definições de interfaces e tipos do TypeScript
+├── global.css                    ← Injeção de dependências do Tailwind/NativeWind
+├── tailwind.config.js            ← Configuração de design system e presets
+├── babel.config.js               ← Configurações do compilador
 └── package.json
 ```
 

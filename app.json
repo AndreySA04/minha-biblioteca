@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "minha-biblioteca",
+    "name": "Minha Biblioteca",
     "slug": "minha-biblioteca",
     "version": "1.0.0",
     "scheme": "minha-biblioteca",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/LibraryIcon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash-icon.png",
@@ -16,6 +16,8 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.andrey.minhabiblioteca",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -26,6 +28,12 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
+      ["expo-splash-screen", {
+        "image": "./assets/splash-icon.png",
+        "imageWidth": 200,
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      }],
       "expo-router",
       "expo-sqlite"
     ]

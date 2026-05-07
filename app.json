@@ -28,14 +28,14 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      ["expo-splash-screen", {
-        "image": "./assets/splash-icon.png",
-        "imageWidth": 200,
-        "resizeMode": "contain",
-        "backgroundColor": "#ffffff"
-      }],
       "expo-router",
       "expo-sqlite"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9a424f6c-5570-49e1-a10d-d5cf7a6ad1c9"
+      }
+    }
   }
 }
